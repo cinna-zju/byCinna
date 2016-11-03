@@ -4,7 +4,7 @@
 #include <cstring>
 #include "GL/glut.h"
 #include "draw.h"
-
+#include <string>
 #define fov 160
 #define fnear 200
 #define ffar 800
@@ -19,12 +19,8 @@ float joints[20][3] = { 0 };
 float strength;
 float gestureSwipe[2];
 
-extern void RenderScene();
-extern float fEarthRot, fMoonRot;
-
-
-
-
+GLuint texID[10];
+//extern int getTex(char*);
 void drawCube(float x, float y, float z)
 {
 	glMatrixMode(GL_MODELVIEW);
@@ -188,7 +184,9 @@ int main(int argc, char** argv) {
 	glutInitWindowSize(800,800);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow("Scene1");
-	
+	texID[1]=getTex("texture\\earth.bmp");//bug: index cant be 0
+	texID[2]=getTex("texture\\sun.bmp");
+	texID[3] = getTex("texture\\moon.bmp");
 	glutDisplayFunc(Render);
 	glutReshapeFunc(ChangeSize);
 	glutIdleFunc(move);
